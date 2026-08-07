@@ -175,6 +175,30 @@
   }
   .shark-game-over-score { font-family:'Bebas Neue',sans-serif; font-size: 3rem; color:#f0d060; }
 
+  /* ===== A PROPOS ===== */
+  .apropos-section { margin: 2rem 0; }
+  .apropos-block {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;
+    background: linear-gradient(160deg, #170b30 0%, #1e0f3d 100%);
+    border: 2px solid #4c1d95; border-radius: 18px; padding: 2rem; margin-bottom: 1.6rem;
+  }
+  .apropos-block.reverse { direction: rtl; }
+  .apropos-block.reverse > * { direction: ltr; }
+  @media (max-width: 700px) { .apropos-block { grid-template-columns: 1fr; direction: ltr !important; } }
+  .apropos-photo {
+    width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden;
+    background: linear-gradient(135deg,#a855f7,#4c1d95); display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 8px 30px rgba(168,85,247,0.3);
+  }
+  .apropos-photo img { width:100%; height:100%; object-fit:cover; }
+  .apropos-photo-placeholder { color: rgba(255,255,255,0.5); font-size: 13px; text-align:center; padding: 1rem; }
+  .apropos-title { font-family:'Bebas Neue',sans-serif; font-size: 1.8rem; letter-spacing:2px; color:#f3e8ff; margin-bottom: 0.7rem; }
+  .apropos-text { font-size: 14px; color:#d8c8f0; line-height:1.7; }
+  .apropos-text b { color: #f0d060; }
+  .apropos-list { list-style:none; margin-top: 0.8rem; }
+  .apropos-list li { font-size: 13.5px; color:#d8c8f0; padding: 0.35rem 0; padding-left: 1.5rem; position: relative; }
+  .apropos-list li::before { content: "✨"; position: absolute; left: 0; }
+
   /* ===== EBOOKS (PDF) ===== */
   .ebook-section { margin: 2rem 0; }
   .ebook-section-title { font-family:'Bebas Neue',sans-serif; font-size: 1.8rem; letter-spacing: 2px; color: #f3e8ff; text-align:center; margin-bottom: 1.2rem; }
@@ -601,6 +625,7 @@
   <nav>
     <a href="#packs">Nos Packs</a>
     <a href="#resultats">Nos résultats</a>
+    <a href="#apropos">À propos</a>
     <a href="https://t.me/totomagicien" target="_blank">@totomagicien</a>
     <a href="https://instagram.com/bigtoto369" target="_blank">@bigtoto369</a>
     <a href="https://www.flashscore.fr" target="_blank">Scores Live</a>
@@ -807,6 +832,132 @@
 
     </div>
 
+    <!-- A PROPOS -->
+    <div class="apropos-section" id="apropos">
+      <div class="apropos-block">
+        <div class="apropos-photo" id="aproposPhoto1">
+          <svg width="100%" height="100%" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="g1" cx="50%" cy="35%" r="70%">
+                <stop offset="0%" stop-color="#3b1a6e"/>
+                <stop offset="100%" stop-color="#170b30"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#g1)"/>
+            <circle cx="90" cy="60" r="2" fill="#f0d060" opacity="0.8"/>
+            <circle cx="330" cy="40" r="2.5" fill="#f0d060" opacity="0.7"/>
+            <circle cx="300" cy="220" r="2" fill="#c084fc" opacity="0.8"/>
+            <circle cx="60" cy="200" r="2.5" fill="#c084fc" opacity="0.6"/>
+            <circle cx="200" cy="30" r="1.8" fill="#f0d060" opacity="0.7"/>
+            <!-- silhouette magicien -->
+            <ellipse cx="200" cy="270" rx="90" ry="14" fill="#000" opacity="0.25"/>
+            <path d="M155 260 C150 190 150 150 160 120 C165 105 180 95 200 95 C220 95 235 105 240 120 C250 150 250 190 245 260 Z" fill="#0d0620"/>
+            <circle cx="200" cy="80" r="30" fill="#0d0620"/>
+            <path d="M165 68 Q200 40 235 68 L242 78 Q200 62 158 78 Z" fill="#0d0620"/>
+            <rect x="150" y="55" width="100" height="12" rx="4" fill="#0d0620"/>
+            <circle cx="192" cy="80" r="3" fill="#f0d060" opacity="0.9"/>
+            <circle cx="208" cy="80" r="3" fill="#f0d060" opacity="0.9"/>
+            <path d="M180 130 Q200 145 220 130" stroke="#a855f7" stroke-width="2" fill="none" opacity="0.6"/>
+            <text x="200" y="150" text-anchor="middle" font-size="26">⚽</text>
+            <text x="200" y="290" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" letter-spacing="3" fill="#f0d060" opacity="0.85">BIGTOTO369</text>
+          </svg>
+        </div>
+        <div>
+          <div class="apropos-title">🎩 Qui suis-je ?</div>
+          <p class="apropos-text">
+            Passionné de football et de statistiques depuis toujours, j'ai commencé à décortiquer les matchs bien avant de penser à en faire quelque chose de sérieux. Année après année, j'ai affiné ma méthode d'analyse — forme des équipes, historique des confrontations, contexte du match — pour transformer une passion en vraie expertise.
+          </p>
+          <p class="apropos-text" style="margin-top:0.8rem;">
+            Aujourd'hui, <b>BIGTOTO369</b> c'est le fruit de ce travail : une communauté de passionnés qui partagent la même envie de comprendre le jeu plus en profondeur, plutôt que de parier à l'aveugle.
+          </p>
+        </div>
+      </div>
+
+      <div class="apropos-block reverse">
+        <div class="apropos-photo" id="aproposPhoto2">
+          <svg width="100%" height="100%" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#1e0f3d"/>
+                <stop offset="100%" stop-color="#4c1d95"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#g2)"/>
+            <circle cx="350" cy="50" r="60" fill="#a855f7" opacity="0.15"/>
+            <circle cx="30" cy="260" r="70" fill="#f0d060" opacity="0.08"/>
+            <!-- carte / dashboard -->
+            <rect x="60" y="70" width="280" height="170" rx="12" fill="#0d0620" opacity="0.85" stroke="#a855f7" stroke-width="1.5"/>
+            <rect x="80" y="90" width="80" height="8" rx="4" fill="#f0d060"/>
+            <rect x="80" y="106" width="50" height="6" rx="3" fill="#c084fc" opacity="0.6"/>
+            <!-- barres graphique -->
+            <rect x="80" y="180" width="18" height="40" rx="2" fill="#a855f7"/>
+            <rect x="106" y="160" width="18" height="60" rx="2" fill="#c084fc"/>
+            <rect x="132" y="190" width="18" height="30" rx="2" fill="#a855f7"/>
+            <rect x="158" y="150" width="18" height="70" rx="2" fill="#f0d060"/>
+            <rect x="184" y="170" width="18" height="50" rx="2" fill="#c084fc"/>
+            <!-- ligne courbe -->
+            <path d="M220 210 L245 175 L270 195 L295 140 L320 160" stroke="#f0d060" stroke-width="2.5" fill="none"/>
+            <circle cx="320" cy="160" r="4" fill="#f0d060"/>
+            <text x="80" y="145" font-size="20">⚽</text>
+            <text x="200" y="270" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" letter-spacing="3" fill="#f3e8ff" opacity="0.85">MÉTHODE D'ANALYSE</text>
+          </svg>
+        </div>
+        <div>
+          <div class="apropos-title">🧠 Notre méthode</div>
+          <p class="apropos-text">Chaque analyse repose sur un vrai travail de fond, pas sur du hasard :</p>
+          <ul class="apropos-list">
+            <li>Étude de la forme récente et des confrontations directes</li>
+            <li>Analyse du contexte (enjeu, absences, fatigue, calendrier)</li>
+            <li>Suivi quotidien des cotes et de leur évolution</li>
+            <li>Un vrai suivi transparent, sans promesse irréaliste</li>
+          </ul>
+          <p class="apropos-text" style="margin-top:0.8rem;">
+            On ne prétend jamais gagner à tous les coups — personne ne le peut dans le sport. Notre objectif, c'est de t'apporter une vraie grille de lecture, construite avec sérieux, pour parier de façon plus réfléchie.
+          </p>
+        </div>
+      </div>
+
+      <div class="apropos-block">
+        <div class="apropos-photo" id="aproposPhoto3">
+          <svg width="100%" height="100%" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="g3" cx="50%" cy="50%" r="75%">
+                <stop offset="0%" stop-color="#4c1d95"/>
+                <stop offset="100%" stop-color="#0d0620"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#g3)"/>
+            <!-- globe -->
+            <circle cx="200" cy="150" r="80" fill="none" stroke="#a855f7" stroke-width="1.5" opacity="0.5"/>
+            <ellipse cx="200" cy="150" rx="80" ry="30" fill="none" stroke="#c084fc" stroke-width="1.2" opacity="0.5"/>
+            <ellipse cx="200" cy="150" rx="35" ry="80" fill="none" stroke="#c084fc" stroke-width="1.2" opacity="0.5"/>
+            <line x1="120" y1="150" x2="280" y2="150" stroke="#a855f7" stroke-width="1" opacity="0.4"/>
+            <!-- points connectes -->
+            <circle cx="140" cy="110" r="5" fill="#f0d060"/>
+            <circle cx="260" cy="120" r="5" fill="#f0d060"/>
+            <circle cx="200" cy="80" r="5" fill="#f0d060"/>
+            <circle cx="150" cy="200" r="5" fill="#f0d060"/>
+            <circle cx="250" cy="195" r="5" fill="#f0d060"/>
+            <line x1="140" y1="110" x2="200" y2="80" stroke="#f0d060" stroke-width="1" opacity="0.6"/>
+            <line x1="260" y1="120" x2="200" y2="80" stroke="#f0d060" stroke-width="1" opacity="0.6"/>
+            <line x1="140" y1="110" x2="150" y2="200" stroke="#f0d060" stroke-width="1" opacity="0.6"/>
+            <line x1="260" y1="120" x2="250" y2="195" stroke="#f0d060" stroke-width="1" opacity="0.6"/>
+            <text x="200" y="158" text-anchor="middle" font-size="24">⚽</text>
+            <text x="200" y="270" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" letter-spacing="3" fill="#f3e8ff" opacity="0.85">COMMUNAUTÉ BIGTOTO369</text>
+          </svg>
+        </div>
+        <div>
+          <div class="apropos-title">🎯 Notre mission</div>
+          <p class="apropos-text">
+            Rendre l'analyse sportive accessible à tous, sans jargon compliqué et sans fausses promesses. Que tu sois débutant curieux ou parieur régulier, on veut t'aider à mieux comprendre le jeu — pas juste te vendre un pronostic de plus.
+          </p>
+          <p class="apropos-text" style="margin-top:0.8rem;">
+            Rejoins la communauté <b>BIGTOTO369</b> et découvre une approche plus sérieuse, plus transparente, du monde des pronostics sportifs.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <!-- EBOOKS PDF -->
     <div class="ebook-section">
       <div class="ebook-section-title">📚 GUIDES PDF</div>
@@ -954,10 +1105,11 @@
       <div class="promo-text">
         <h3>📸 NOS RÉSULTATS</h3>
         <p>Retrouve notre historique et nos publications depuis 2015</p>
-        <p class="shark-promo-note">Ancien site et réseaux sociaux — pour te faire ta propre idée</p>
+        <p class="shark-promo-note">Rejoins notre Telegram public pour voir l'ambiance et les retours en direct, sans filtre</p>
       </div>
       <a href="https://www.totomagicien.com" target="_blank" class="btn-melbet">🌐 Voir l'ancien site →</a>
       <a href="https://instagram.com/bigtoto369" target="_blank" class="btn-melbet">📷 Voir Instagram →</a>
+      <a href="https://t.me/GREENEVERERYDAY" target="_blank" class="btn-melbet" style="background:#00b0ff;">💬 Voir la communauté sur Telegram →</a>
     </div>
 
   </div>
