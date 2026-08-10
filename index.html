@@ -1051,8 +1051,9 @@
 
       <div id="quizIntro">
         <div class="quiz-title">🧠 TESTE TES CONNAISSANCES FOOT</div>
-        <p class="quiz-sub">10 questions pour savoir si t'es un vrai connaisseur du ballon rond</p>
-        <button class="quiz-start-btn" onclick="startQuiz()">▶ Lancer le test</button>
+        <p class="quiz-sub">10 questions pour savoir si t'es un vrai connaisseur du ballon rond — 1 seule tentative toutes les 24h</p>
+        <button class="quiz-start-btn" id="quizStartBtn" onclick="startQuiz()">▶ Lancer le test</button>
+        <p id="quizLockMsg" style="display:none;color:#f0d060;font-size:13px;margin-top:0.8rem;"></p>
       </div>
 
       <div id="quizGame" style="display:none;">
@@ -1066,8 +1067,9 @@
         <div class="quiz-result-score" id="quizScore">0/10</div>
         <div class="quiz-result-rank" id="quizRank"></div>
         <div class="quiz-result-msg" id="quizMsg"></div>
-        <button class="quiz-restart-btn" onclick="startQuiz()">🔄 Rejouer</button>
+        <button class="quiz-restart-btn" id="quizRestartBtn" onclick="startQuiz()">🔄 Rejouer</button>
         <button class="quiz-restart-btn" style="border-color:#f0d060;color:#f0d060;" onclick="shareQuizScore()">📤 Partager mon score</button>
+        <p id="quizResultLockMsg" style="display:none;color:#f0d060;font-size:12px;margin-top:0.6rem;"></p>
       </div>
     </div>
 
@@ -1244,7 +1246,40 @@
 
   let quizIndex = 0, quizScore = 0, quizLocked = false;
 
+  const QUIZ_COOLDOWN_MS = 24 * 60 * 60 * 1000;
+
+  function getQuizLockRemaining() {
+    const last = localStorage.getItem('quiz_last_attempt');
+    if (!last) return 0;
+    const remaining = QUIZ_COOLDOWN_MS - (Date.now() - parseInt(last, 10));
+    return remaining > 0 ? remaining : 0;
+  }
+
+  function formatRemaining(ms) {
+    const h = Math.floor(ms / 3600000);
+    const m = Math.floor((ms % 3600000) / 60000);
+    return `${h}h ${m}min`;
+  }
+
+  function checkQuizLock() {
+    const remaining = getQuizLockRemaining();
+    const intro = document.getElementById('quizIntro');
+    const startBtn = document.getElementById('quizStartBtn');
+    const lockMsg = document.getElementById('quizLockMsg');
+    if (remaining > 0) {
+      if (startBtn) startBtn.style.display = 'none';
+      if (lockMsg) {
+        lockMsg.style.display = 'block';
+        lockMsg.textContent = `⏳ Tu as déjà participé ! Reviens dans ${formatRemaining(remaining)} pour retenter ta chance.`;
+      }
+    } else {
+      if (startBtn) startBtn.style.display = 'inline-block';
+      if (lockMsg) lockMsg.style.display = 'none';
+    }
+  }
+
   function startQuiz() {
+    if (getQuizLockRemaining() > 0) { checkQuizLock(); return; }
     quizIndex = 0; quizScore = 0; quizLocked = false;
     document.getElementById('quizIntro').style.display = 'none';
     document.getElementById('quizResult').style.display = 'none';
@@ -1300,6 +1335,7 @@
   }
 
   function showQuizResult() {
+    localStorage.setItem('quiz_last_attempt', Date.now().toString());
     document.getElementById('quizProgress').style.width = '100%';
     document.getElementById('quizGame').style.display = 'none';
     document.getElementById('quizResult').style.display = 'block';
@@ -1313,6 +1349,14 @@
     else { rank = "🏆 Expert du ballon rond"; msg = "Score presque parfait, chapeau !"; }
     document.getElementById('quizRank').textContent = rank;
     document.getElementById('quizMsg').textContent = msg;
+
+    const restartBtn = document.getElementById('quizRestartBtn');
+    if (restartBtn) restartBtn.style.display = 'none';
+    const resultLockMsg = document.getElementById('quizResultLockMsg');
+    if (resultLockMsg) {
+      resultLockMsg.style.display = 'block';
+      resultLockMsg.textContent = `⏳ Une seule tentative toutes les 24h — reviens dans ${formatRemaining(getQuizLockRemaining())}.`;
+    }
 
     if (quizScore >= 7) launchQuizConfetti();
   }
@@ -1432,6 +1476,8 @@
   function copyText(value, label) {
     navigator.clipboard.writeText(value).then(() => showToast('✅ ' + label + ' copié !'));
   }
+
+  checkQuizLock();
 </script>
 
 </body>
