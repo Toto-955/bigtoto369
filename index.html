@@ -1276,21 +1276,27 @@
     quizLocked = true;
     const item = QUIZ_QUESTIONS[quizIndex];
     const buttons = document.querySelectorAll('#quizOptions .quiz-opt');
+    const isCorrect = i === item.correct;
     buttons.forEach((b, idx) => {
       b.disabled = true;
-      if (idx === item.correct) b.classList.add('correct');
-      else if (idx === i) b.classList.add('wrong');
+      if (idx === i) b.classList.add(isCorrect ? 'correct' : 'wrong');
     });
-    if (i === item.correct) quizScore++;
 
-    setTimeout(() => {
-      quizIndex++;
-      if (quizIndex < QUIZ_QUESTIONS.length) {
-        renderQuizQuestion();
-      } else {
+    if (isCorrect) {
+      quizScore++;
+      setTimeout(() => {
+        quizIndex++;
+        if (quizIndex < QUIZ_QUESTIONS.length) {
+          renderQuizQuestion();
+        } else {
+          showQuizResult();
+        }
+      }, 900);
+    } else {
+      setTimeout(() => {
         showQuizResult();
-      }
-    }, 900);
+      }, 900);
+    }
   }
 
   function showQuizResult() {
