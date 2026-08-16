@@ -175,6 +175,17 @@
   }
   .shark-game-over-score { font-family:'Bebas Neue',sans-serif; font-size: 3rem; color:#f0d060; }
 
+  /* ===== MATCHS EN DIRECT ===== */
+  .live-matches-section {
+    background: linear-gradient(135deg, #170b30 0%, #1e0f3d 100%);
+    border: 2px solid #4c1d95; border-radius: 18px; padding: 1.8rem; margin: 2rem 0; text-align:center;
+  }
+  .live-matches-title { font-family:'Bebas Neue',sans-serif; font-size: 1.8rem; letter-spacing:2px; color:#f3e8ff; margin-bottom:0.3rem; }
+  .live-matches-sub { font-size: 12.5px; color:#b39ddb; margin-bottom: 1.2rem; }
+  .live-matches-frame-wrap { display:flex; justify-content:center; }
+  .live-matches-credit { font-size: 10.5px; color:#6b5a8a; margin-top: 0.8rem; }
+  .live-matches-credit a { color:#a855f7; }
+
   /* ===== A PROPOS ===== */
   .apropos-section { margin: 2rem 0; }
   .apropos-block {
@@ -625,6 +636,7 @@
   <nav>
     <a href="#packs">Nos Packs</a>
     <a href="#resultats">Nos résultats</a>
+    <a href="#matchs-direct">Matchs en direct</a>
     <a href="#apropos">À propos</a>
     <a href="#guides">Guides PDF</a>
     <a href="https://t.me/totomagicien" target="_blank">@totomagicien</a>
@@ -755,6 +767,42 @@
           </ul>
           <!-- LIEN STRIPE SHARKVIP -->
           <a href="https://buy.stripe.com/7sYeVd32t6Cl7DtaNO0RG01" target="_blank" class="btn-subscribe blue-btn">🦈 Devenir SHARK VIP</a>
+        </div>
+      </div>
+
+      <!-- PROMO BUNDLE VIP -->
+      <div class="pack-card" style="border-color:#a855f7;background:#fff;position:relative;overflow:hidden;">
+        <div class="pack-visual" style="background:linear-gradient(135deg,#170b30 0%,#4c1d95 100%);display:flex;align-items:center;justify-content:center;">
+          <svg width="100%" height="100%" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="180" fill="#170b30"/>
+            <circle cx="330" cy="40" r="70" fill="#a855f7" opacity="0.2"/>
+            <circle cx="60" cy="150" r="90" fill="#f0d060" opacity="0.15"/>
+            <text x="200" y="90" text-anchor="middle" font-size="46">🎁</text>
+            <text x="200" y="135" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="24" letter-spacing="2" fill="#f3e8ff">BUNDLE VIP</text>
+            <text x="200" y="155" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#c084fc">TOTOVIP + SHARKVIP réunis</text>
+          </svg>
+          <div class="pack-overlay">
+            <div class="toto-label" style="color:#a855f7;">OFFRE COMBINÉE</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-header">
+            <div>
+              <div class="tag-best" style="background:linear-gradient(90deg,#a855f7,#c084fc);">PROMO</div>
+              <div class="card-name">Accès VIP complet (hors À vie)</div>
+            </div>
+            <div class="price-tag">
+              <div class="price-main" style="color:#a855f7;">20 $</div>
+              <div class="price-period">/mois</div>
+            </div>
+          </div>
+          <ul class="features">
+            <li>Tout le pack TOTOVIP inclus</li>
+            <li>Tout le pack SHARKVIP inclus</li>
+            <li>Un seul paiement pour les deux</li>
+          </ul>
+          <div class="pay-chip" style="color:#a855f7;margin:0 auto 0.6rem;max-width:280px;font-size:0.8rem;word-break:break-all;" onclick="copyText('0x2645cff6a9e6a63c936e14a58a67188011903121','Adresse USDT')">0x2645cff6a9e6a63c936e14a58a67188011903121</div>
+          <div class="pay-note">👆 Clique pour copier — paiement en USDT (réseau ERC20) via Bybit</div>
         </div>
       </div>
 
@@ -1159,6 +1207,23 @@
       </div>
     </div>
 
+    <!-- MATCHS EN DIRECT -->
+    <div class="live-matches-section" id="matchs-direct">
+      <div class="live-matches-title">⚽ MATCHS EN DIRECT</div>
+      <p class="live-matches-sub">Scores en temps réel, mis à jour automatiquement — aucune prédiction, juste les vrais résultats</p>
+      <div class="live-matches-frame-wrap">
+        <iframe
+          id="sportbusy-embed-live"
+          width="380"
+          height="500"
+          style="border:none;border-radius:12px;overflow:hidden;max-width:100%;"
+          loading="lazy"
+          title="Scores en direct SportBusy">
+        </iframe>
+      </div>
+      <p class="live-matches-credit">Données sportives par <a href="https://www.sportbusy.com" target="_blank">SportBusy</a></p>
+    </div>
+
     <!-- NOS RESULTATS -->
     <div class="melbet-promo" id="resultats">
       <div class="promo-text">
@@ -1482,6 +1547,17 @@
   function copyText(value, label) {
     navigator.clipboard.writeText(value).then(() => showToast('✅ ' + label + ' copié !'));
   }
+
+  /* ===== WIDGET MATCHS EN DIRECT ===== */
+  (function() {
+    var f = document.getElementById('sportbusy-embed-live');
+    if (!f) return;
+    try {
+      var u = new URL('https://www.sportbusy.com/embed/live');
+      u.searchParams.set('sb_parent', location.href);
+      f.src = u.toString();
+    } catch (e) {}
+  })();
 
   checkQuizLock();
 </script>
