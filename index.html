@@ -340,6 +340,46 @@
     line-height: 1.6;
   }
 
+  /* ===== PUB FLOTTANTE ===== */
+  #floating-promo {
+    position: fixed; top: 14px; right: 14px; left: auto; bottom: auto; transform: translateX(150px);
+    z-index: 10000; display: flex; align-items: center; gap: 0.9rem;
+    background: linear-gradient(135deg,#170b30,#4c1d95); border: 2px solid #f0d060;
+    border-radius: 14px; padding: 0.8rem 1rem; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    max-width: min(320px, 92vw); transition: transform .4s ease;
+  }
+  #floating-promo.show { transform: translateX(0); }
+  @media (max-width: 700px) {
+    #floating-promo { top: auto; bottom: 14px; right: 10px; left: 10px; max-width: none; transform: translateY(150px); }
+    #floating-promo.show { transform: translateY(0); }
+  }
+  #floating-promo .fp-text { font-size: 12.5px; color:#f3e8ff; line-height:1.4; }
+  #floating-promo .fp-text b { color:#f0d060; }
+  #floating-promo .fp-btn {
+    background: linear-gradient(90deg,#c9a227,#f0d060); color:#1e0f3d; font-weight:800;
+    border:none; border-radius: 8px; padding: 0.5rem 0.9rem; font-size: 12.5px; cursor:pointer; white-space:nowrap;
+  }
+  #floating-promo .fp-close {
+    background:none; border:none; color:#9fb8d9; font-size:16px; cursor:pointer; padding:0 0.2rem;
+  }
+
+  /* ===== ECRAN DE BIENVENUE ===== */
+  #welcome-overlay {
+    position: fixed; inset: 0; z-index: 9998; display: none; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at 50% 30%, #4c1d95 0%, #0d0620 75%);
+    text-align: center; padding: 1.5rem;
+  }
+  .welcome-box { max-width: 480px; }
+  .welcome-flag { font-size: 3rem; margin-bottom: 0.6rem; }
+  .welcome-title { font-family:'Bebas Neue',sans-serif; font-size: 2.4rem; letter-spacing: 3px; color: #f3e8ff; line-height:1.2; margin-bottom: 0.8rem; }
+  .welcome-title span { color: #f0d060; }
+  .welcome-text { color: #d8c8f0; font-size: 14.5px; line-height: 1.6; margin-bottom: 1.6rem; }
+  .welcome-btn {
+    background: linear-gradient(90deg,#c9a227,#f0d060); color:#1e0f3d; font-weight:800;
+    border:none; border-radius: 12px; padding: 1rem 2.4rem; font-size: 16px; cursor:pointer;
+    box-shadow: 0 6px 24px rgba(240,208,96,0.4); letter-spacing: 0.5px;
+  }
+
   #cgu-overlay {
     position: fixed; inset: 0; background: rgba(10,20,60,0.92);
     z-index: 9999; display: flex; align-items: center; justify-content: center;
@@ -615,6 +655,23 @@
       Ces CGU sont soumises au droit français. Tout litige sera porté devant les tribunaux compétents français.
     </div>
     <button class="btn-cgu-accept" onclick="acceptCGU()">✅ J'accepte les conditions — Accéder au site</button>
+  </div>
+</div>
+
+<div id="welcome-overlay">
+  <div class="welcome-box">
+    <div class="welcome-flag">🇩🇿</div>
+    <div class="welcome-title">WELCOME PARIEUR DZ<br>T'es prêt à rejoindre <span>le Roi des pronos</span> ?</div>
+    <p class="welcome-text">
+      Ici pas de blabla — que de l'analyse sérieuse, de la transparence sur les résultats, et une vraie communauté de passionnés.<br>
+      Rejoins ceux qui ont décidé de parier plus intelligemment.
+    </p>
+    <button class="welcome-btn" onclick="enterSite()">🚀 C'est parti</button>
+    <div style="display:flex;gap:1.2rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap;">
+      <span style="font-size:11.5px;color:#9fb8d9;">🔒 Paiement sécurisé</span>
+      <span style="font-size:11.5px;color:#9fb8d9;">✅ Communauté active</span>
+      <span style="font-size:11.5px;color:#9fb8d9;">⚡ Accès instantané</span>
+    </div>
   </div>
 </div>
 
@@ -1243,19 +1300,44 @@
 <div id="copy-toast">✅ Copié dans le presse-papiers !</div>
 
 <script>
+  /* ===== STOCKAGE SECURISE (evite les crashs si localStorage indisponible) ===== */
+  var safeStorage = {
+    get: function(key) { try { return localStorage.getItem(key); } catch (e) { return null; } },
+    set: function(key, val) { try { localStorage.setItem(key, val); } catch (e) {} }
+  };
+
   /* ===== CGU OVERLAY ===== */
   function acceptCGU() {
     document.getElementById('cgu-overlay').style.display = 'none';
+    document.getElementById('welcome-overlay').style.display = 'flex';
+    safeStorage.set('cgu_accepted_bigtoto369', 'true');
+  }
+  function enterSite() {
+    document.getElementById('welcome-overlay').style.display = 'none';
     document.getElementById('site-content').style.display = 'block';
-    localStorage.setItem('cgu_accepted_bigtoto369', 'true');
+    triggerFloatingPromo();
+  }
+  function triggerFloatingPromo() {
+    var promo = document.getElementById('floating-promo');
+    if (!promo) return;
+    setTimeout(function() {
+      promo.classList.add('show');
+      setTimeout(closeFloatingPromo, 30000);
+    }, 3000);
+  }
+  function closeFloatingPromo() {
+    var promo = document.getElementById('floating-promo');
+    if (promo) promo.classList.remove('show');
   }
   function showCGU() {
     document.getElementById('cgu-overlay').style.display = 'flex';
+    document.getElementById('welcome-overlay').style.display = 'none';
     document.getElementById('site-content').style.display = 'none';
   }
-  if (localStorage.getItem('cgu_accepted_bigtoto369') === 'true') {
+  if (safeStorage.get('cgu_accepted_bigtoto369') === 'true') {
     document.getElementById('cgu-overlay').style.display = 'none';
     document.getElementById('site-content').style.display = 'block';
+    triggerFloatingPromo();
   }
 
   /* ===== COPY TOAST ===== */
@@ -1306,7 +1388,7 @@
   const QUIZ_COOLDOWN_MS = 24 * 60 * 60 * 1000;
 
   function getQuizLockRemaining() {
-    const last = localStorage.getItem('quiz_last_attempt');
+    const last = safeStorage.get('quiz_last_attempt');
     if (!last) return 0;
     const remaining = QUIZ_COOLDOWN_MS - (Date.now() - parseInt(last, 10));
     return remaining > 0 ? remaining : 0;
@@ -1392,7 +1474,7 @@
   }
 
   function showQuizResult() {
-    localStorage.setItem('quiz_last_attempt', Date.now().toString());
+    safeStorage.set('quiz_last_attempt', Date.now().toString());
     document.getElementById('quizProgress').style.width = '100%';
     document.getElementById('quizGame').style.display = 'none';
     document.getElementById('quizResult').style.display = 'block';
@@ -1572,6 +1654,12 @@
 
   checkQuizLock();
 </script>
+
+<div id="floating-promo">
+  <div class="fp-text">🦈 <b>Envie de vraies analyses ?</b><br>Rejoins TOTOVIP ou SHARKVIP dès maintenant</div>
+  <button class="fp-btn" onclick="document.querySelector('.packs-grid').scrollIntoView({behavior:'smooth'});closeFloatingPromo();">Voir les packs</button>
+  <button class="fp-close" onclick="closeFloatingPromo()">✕</button>
+</div>
 
 </body>
 </html>
