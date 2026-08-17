@@ -342,16 +342,16 @@
 
   /* ===== PUB FLOTTANTE ===== */
   #floating-promo {
-    position: fixed; top: 14px; right: 14px; left: auto; bottom: auto; transform: translateX(150px);
+    position: fixed; top: 14px; right: -400px; left: auto; bottom: auto;
     z-index: 10000; display: flex; align-items: center; gap: 0.9rem;
     background: linear-gradient(135deg,#170b30,#4c1d95); border: 2px solid #f0d060;
     border-radius: 14px; padding: 0.8rem 1rem; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-    max-width: min(320px, 92vw); transition: transform .4s ease;
+    max-width: min(320px, 92vw); transition: right .5s ease, opacity .5s ease; opacity: 0;
   }
-  #floating-promo.show { transform: translateX(0); }
+  #floating-promo.show { right: 14px; opacity: 1; }
   @media (max-width: 700px) {
-    #floating-promo { top: auto; bottom: 14px; right: 10px; left: 10px; max-width: none; transform: translateY(150px); }
-    #floating-promo.show { transform: translateY(0); }
+    #floating-promo { top: auto; bottom: -300px; right: 10px; left: 10px; max-width: none; }
+    #floating-promo.show { bottom: 14px; right: 10px; }
   }
   #floating-promo .fp-text { font-size: 12.5px; color:#f3e8ff; line-height:1.4; }
   #floating-promo .fp-text b { color:#f0d060; }
@@ -1327,7 +1327,9 @@
   }
   function closeFloatingPromo() {
     var promo = document.getElementById('floating-promo');
-    if (promo) promo.classList.remove('show');
+    if (!promo) return;
+    promo.classList.remove('show');
+    setTimeout(function() { promo.style.visibility = 'hidden'; }, 550);
   }
   function showCGU() {
     document.getElementById('cgu-overlay').style.display = 'flex';
