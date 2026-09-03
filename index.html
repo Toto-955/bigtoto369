@@ -329,6 +329,30 @@
     text-align: center; user-select: all; margin-top: 0.4rem;
   }
   .pay-note { font-size: 10px; color:#b39ddb; margin-top:0.5rem; line-height:1.4; }
+
+  /* ===== CONVERSION DE PRIX ANIMEE ===== */
+  .price-convert { position: relative; display: inline-block; cursor: pointer; }
+  .price-convert::after {
+    content: "💱"; font-size: 0.55em; vertical-align: super; margin-left: 3px; opacity: 0.7;
+  }
+  .price-tooltip {
+    position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%) scale(0.7);
+    background: linear-gradient(135deg,#170b30,#4c1d95); border: 2px solid #f0d060;
+    border-radius: 10px; padding: 0.5rem 0.8rem; white-space: nowrap;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #f3e8ff;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4); opacity: 0; pointer-events: none;
+    transition: opacity .25s ease, transform .25s cubic-bezier(.34,1.56,.64,1); z-index: 50;
+  }
+  .price-tooltip::after {
+    content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    border: 6px solid transparent; border-top-color: #f0d060;
+  }
+  .price-convert:hover .price-tooltip,
+  .price-convert.tap-active .price-tooltip {
+    opacity: 1; transform: translateX(-50%) scale(1);
+  }
+  .price-tooltip .pt-da { color: #4ade80; }
+  .price-tooltip .pt-usd { color: #f0d060; }
   .pay-btn-link { display:inline-block; margin-top:0.5rem; padding:0.55rem 1.1rem; border-radius:10px; color:#fff; font-weight:700; font-size:13px; text-decoration:none; }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -735,7 +759,7 @@
               <div class="card-name">Pack ALGÉRIE</div>
             </div>
             <div class="price-tag">
-              <div class="price-main" style="color:#1a9f4a;">🔥 8 000 DA</div>
+              <div class="price-main price-convert" style="color:#1a9f4a;">🔥 8 000 DA<span class="price-tooltip">≈ <span class="pt-usd">44 $</span> / <span class="pt-usd">40 €</span></span></div>
               <div class="price-period">/mois</div>
             </div>
           </div>
@@ -772,7 +796,7 @@
               <div class="card-name">TOTOVIP + SHARKVIP offert</div>
             </div>
             <div class="price-tag">
-              <div class="price-main" style="color:#f0d060;">50 $</div>
+              <div class="price-main price-convert" style="color:#f0d060;">50 $<span class="price-tooltip">≈ <span class="pt-da">10 000 DA</span> / <span class="pt-usd">46 €</span></span></div>
               <div class="price-period">≈ 9 000 DA</div>
             </div>
           </div>
@@ -848,7 +872,7 @@
               <div class="card-name">Pack TOTOVIP</div>
             </div>
             <div class="price-tag">
-              <div class="price-main">50 €</div>
+              <div class="price-main price-convert">50 €<span class="price-tooltip">≈ <span class="pt-da">10 000 DA</span> / <span class="pt-usd">55 $</span></span></div>
               <div class="price-period">/mois</div>
             </div>
           </div>
@@ -889,7 +913,7 @@
               <div class="card-name">Abonnement À VIE</div>
             </div>
             <div class="price-tag">
-              <div class="price-main" style="color:#f0d060;">100 €</div>
+              <div class="price-main price-convert" style="color:#f0d060;">100 €<span class="price-tooltip">≈ <span class="pt-da">20 000 DA</span> / <span class="pt-usd">110 $</span></span></div>
               <div class="price-period">paiement unique</div>
             </div>
           </div>
@@ -1131,7 +1155,7 @@
                 <div class="card-name">L'art secret du bookmaker</div>
               </div>
               <div class="price-tag">
-                <div class="price-main" style="color:#f0d060;">15 €</div>
+                <div class="price-main price-convert" style="color:#f0d060;">15 €<span class="price-tooltip">≈ <span class="pt-da">3 000 DA</span> / <span class="pt-usd">16 $</span></span></div>
                 <div class="price-period">≈ 3 500 DA</div>
               </div>
             </div>
@@ -1598,6 +1622,19 @@
       f.src = u.toString();
     } catch (e) {}
   })();
+
+  /* ===== TOOLTIPS DE CONVERSION (support tactile) ===== */
+  document.querySelectorAll('.price-convert').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var wasActive = el.classList.contains('tap-active');
+      document.querySelectorAll('.price-convert.tap-active').forEach(function(o) { o.classList.remove('tap-active'); });
+      if (!wasActive) el.classList.add('tap-active');
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.price-convert.tap-active').forEach(function(o) { o.classList.remove('tap-active'); });
+  });
 
   checkQuizLock();
 </script>
