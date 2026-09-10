@@ -572,6 +572,24 @@
   .tag-best { background: var(--gold); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem; display: inline-block; }
   .tag-popular { background: #0ea5e9; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 12px; letter-spacing: 1px; margin-bottom: 0.5rem; display: inline-block; }
 
+  /* ===== NOUVEAU CANAL TELEGRAM ===== */
+  .telegram-channel-section {
+    background: linear-gradient(135deg, #0d1f3d 0%, #1e0f3d 100%);
+    border: 2px solid #00b0ff; border-radius: 18px; padding: 2rem; margin: 2rem 0;
+    display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+    box-shadow: 0 6px 30px rgba(0,176,255,0.2);
+  }
+  .telegram-channel-visual { flex: 0 0 160px; }
+  .telegram-channel-text { flex: 1; min-width: 240px; }
+  .telegram-channel-title { font-family:'Bebas Neue',sans-serif; font-size: 1.9rem; letter-spacing: 2px; color:#f3e8ff; margin-bottom: 0.5rem; }
+  .telegram-channel-desc { font-size: 13.5px; color:#b8d4f0; line-height: 1.6; margin-bottom: 1.1rem; }
+  .telegram-channel-btn {
+    display: inline-block; background: linear-gradient(90deg,#00b0ff,#0ea5e9); color:#04121f; font-weight:800;
+    border-radius: 12px; padding: 0.85rem 1.8rem; font-size: 14.5px; text-decoration:none;
+    box-shadow: 0 4px 20px rgba(0,176,255,0.4);
+  }
+  @media (max-width: 600px) { .telegram-channel-section { flex-direction: column; text-align: center; } }
+
   .melbet-promo {
     background: linear-gradient(135deg, #0f1f4a 0%, #1a3c8f 100%);
     border-radius: 16px; padding: 1.5rem 2rem;
@@ -700,6 +718,34 @@
 </div>
 
 <div id="site-content" style="display:none;">
+
+    <!-- NOUVEAU CANAL TELEGRAM -->
+    <div class="telegram-channel-section">
+      <div class="telegram-channel-visual">
+        <svg width="100%" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="tgGrad" cx="35%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#5fc8ff"/>
+              <stop offset="100%" stop-color="#0088cc"/>
+            </radialGradient>
+          </defs>
+          <circle cx="80" cy="80" r="72" fill="url(#tgGrad)"/>
+          <circle cx="80" cy="80" r="72" fill="none" stroke="#f0d060" stroke-width="2.5" opacity="0.7"/>
+          <path d="M40 82 L118 46 C122 44 126 47 124 52 L108 118 C106 124 100 125 96 121 L74 103 L60 114 C57 116 53 115 53 111 L52 90 L98 56 L54 88 L40 82Z" fill="#fff"/>
+          <circle cx="30" cy="35" r="3" fill="#f0d060" opacity="0.8"/>
+          <circle cx="140" cy="50" r="2.5" fill="#f0d060" opacity="0.8"/>
+          <circle cx="135" cy="125" r="3" fill="#f0d060" opacity="0.8"/>
+        </svg>
+      </div>
+      <div class="telegram-channel-text">
+        <div class="telegram-channel-title">📣 Notre nouveau canal Telegram</div>
+        <p class="telegram-channel-desc">
+          On centralise tout au même endroit : annonces, mises à jour, et actus de la communauté BIGTOTO369. Rejoins le canal officiel pour ne rien manquer.
+        </p>
+        <a href="https://t.me/BIGTOTOBIGMONEY" target="_blank" class="telegram-channel-btn">📲 Rejoindre le canal →</a>
+      </div>
+    </div>
+
 
 <div class="secure-bar">
   <span>🔒 Paiement SSL Sécurisé</span>
